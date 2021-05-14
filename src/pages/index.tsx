@@ -27,6 +27,11 @@ export default function Home() {
           onSearch={onSearch}
         />
       </Space>
+      <Space className={styles.bookList} direction="vertical">
+
+      </Space>
+
+
     </>
   );
 }

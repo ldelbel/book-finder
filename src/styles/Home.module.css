@@ -1,5 +1,6 @@
 .covering {
-  background-color: #597ef7;
+  background: #597ef7;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(46,63,179,1) 27%, rgba(89,126,247,1) 100%);
   width: 100%;
   height: 60vh;
   display: flex;
@@ -37,10 +38,15 @@
   font-family: 'Poppins', sans-serif;
   color: #061178;
   letter-spacing: -10px;
+  text-shadow: 3px 3px 3px rgba(255,255,255,0.4);
 }
 
 .searchBar {
   margin-top: 4rem;
   display: flex;
   padding: 0 20%;
+}
+
+.bookList {
+  
 }
