@@ -1,5 +1,14 @@
 import styles from "../styles/Home.module.css";
-import { Input, Space, Empty, Pagination, Layout, Card } from "antd";
+import {
+  Input,
+  Space,
+  Empty,
+  Pagination,
+  Layout,
+  Card,
+  Modal,
+  Button,
+} from "antd";
 import { useState, useEffect } from "react";
 import { api } from "../services/api";
 
@@ -15,19 +24,37 @@ export default function Home() {
   const [page, setPage] = useState(0);
   const [data, setData] = useState(null);
   const [totalBooks, setTotalBooks] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalCurrentBook, setModalCurrentBook] = useState({
+    volumeInfo: { title: "" },
+  });
+
+  console.log(data);
+
+  const showModal = (item) => {
+    setModalCurrentBook(item);
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   const fetchBooks = async (page = 0) => {
     const { data } = await api.get(
-      `volumes?q=lord+rings&maxResults=20&startIndex=${page * 20}&key=AIzaSyDAqfUsi25efc9iYx7ZppjrP756SKRafWQ`
+      `volumes?q=lord+rings&maxResults=20&startIndex=${
+        page * 20
+      }&key=AIzaSyDAqfUsi25efc9iYx7ZppjrP756SKRafWQ`
     );
     const { items, totalItems } = data;
 
     setData(items);
-    
-    if (page === 0)
-      setTotalBooks(totalItems);
 
-    console.log(items);
+    if (page === 0) setTotalBooks(totalItems);
   };
 
   useEffect(() => {
@@ -81,10 +108,11 @@ export default function Home() {
                       overflow: "hidden",
                       background: "#f0f0f0",
                     }}
+                    onClick={() => showModal(item)}
                   >
                     {item.volumeInfo.imageLinks ? (
                       <img
-                        alt="example"
+                        alt={item.volumeInfo.title}
                         src={item.volumeInfo.imageLinks.thumbnail}
                         width={num}
                       />
@@ -101,7 +129,7 @@ export default function Home() {
               </Card>
             ))
           ) : (
-            <Empty />
+            <Empty description={<span>No Image</span>} />
           )}
         </Space>
         <Pagination
@@ -109,11 +137,44 @@ export default function Home() {
           total={totalBooks}
           pageSize={20}
           showSizeChanger={false}
-          style={{ marginTop: '1rem'}}
+          style={{ marginTop: "1rem" }}
           onChange={(page, _) => setPage(page)}
         />
       </Space>
       <Footer className={styles.footer} />
+
+      {/* MODAL INFO */}
+      <Modal
+        title={modalCurrentBook?.volumeInfo?.title}
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <p>
+          <strong>Descrição: </strong>
+          {modalCurrentBook?.volumeInfo?.description}
+        </p>
+        <span>
+          {modalCurrentBook.volumeInfo.authors?.length === 1 ? (
+            <span>
+              <strong>Autor:</strong> {modalCurrentBook?.volumeInfo?.authors}
+            </span>
+          ) : (
+            <span>
+              <strong>Autores:</strong>{" "}
+              {modalCurrentBook.volumeInfo.authors &&
+                modalCurrentBook?.volumeInfo?.authors[0]}
+              ,{" "}
+              {modalCurrentBook.volumeInfo.authors &&
+                modalCurrentBook?.volumeInfo?.authors[1]}
+            </span>
+          )}
+        </span>
+        <div style={{ marginTop: 20}}>
+          {" "}
+          <Button type="primary" href={modalCurrentBook.volumeInfo.infoLink}>Ver na Google Store</Button>
+        </div>
+      </Modal>
     </>
   );
 }
