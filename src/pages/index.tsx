@@ -11,14 +11,13 @@ import {
 } from "antd";
 import { useState, useEffect } from "react";
 import { api } from "../services/api";
+import { BookModal } from "../components/BookModal";
+import { BookCard } from "../components/BookCard";
 
 const { Search } = Input;
 const { Footer } = Layout;
-const { Meta } = Card;
 
 const onSearch = (value) => console.log(value);
-
-const num = 199;
 
 export default function Home() {
   const [page, setPage] = useState(0);
@@ -26,7 +25,7 @@ export default function Home() {
   const [totalBooks, setTotalBooks] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalCurrentBook, setModalCurrentBook] = useState({
-    volumeInfo: { title: "" },
+    title: "",
   });
 
   console.log(data);
@@ -46,7 +45,7 @@ export default function Home() {
 
   const fetchBooks = async (page = 0) => {
     const { data } = await api.get(
-      `volumes?q=lord+rings&maxResults=20&startIndex=${
+      `volumes?q=harry+potter&maxResults=20&startIndex=${
         page * 20
       }&key=AIzaSyDAqfUsi25efc9iYx7ZppjrP756SKRafWQ`
     );
@@ -95,38 +94,7 @@ export default function Home() {
         >
           {data ? (
             data.map((item) => (
-              <Card
-                hoverable
-                style={{ width: num, height: "25rem", overflow: "hidden" }}
-                cover={
-                  <div
-                    style={{
-                      height: "20rem",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      overflow: "hidden",
-                      background: "#f0f0f0",
-                    }}
-                    onClick={() => showModal(item)}
-                  >
-                    {item.volumeInfo.imageLinks ? (
-                      <img
-                        alt={item.volumeInfo.title}
-                        src={item.volumeInfo.imageLinks.thumbnail}
-                        width={num}
-                      />
-                    ) : (
-                      <Empty />
-                    )}
-                  </div>
-                }
-              >
-                <Meta
-                  title={item.volumeInfo.title}
-                  description={item.volumeInfo.subtitle}
-                />
-              </Card>
+              <BookCard book={item.volumeInfo} showModal={showModal} />
             ))
           ) : (
             <Empty description={<span>No Image</span>} />
@@ -144,37 +112,12 @@ export default function Home() {
       <Footer className={styles.footer} />
 
       {/* MODAL INFO */}
-      <Modal
-        title={modalCurrentBook?.volumeInfo?.title}
+      <BookModal
+        book={modalCurrentBook}
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-      >
-        <p>
-          <strong>Descrição: </strong>
-          {modalCurrentBook?.volumeInfo?.description}
-        </p>
-        <span>
-          {modalCurrentBook.volumeInfo.authors?.length === 1 ? (
-            <span>
-              <strong>Autor:</strong> {modalCurrentBook?.volumeInfo?.authors}
-            </span>
-          ) : (
-            <span>
-              <strong>Autores:</strong>{" "}
-              {modalCurrentBook.volumeInfo.authors &&
-                modalCurrentBook?.volumeInfo?.authors[0]}
-              ,{" "}
-              {modalCurrentBook.volumeInfo.authors &&
-                modalCurrentBook?.volumeInfo?.authors[1]}
-            </span>
-          )}
-        </span>
-        <div style={{ marginTop: 20}}>
-          {" "}
-          <Button type="primary" href={modalCurrentBook.volumeInfo.infoLink}>Ver na Google Store</Button>
-        </div>
-      </Modal>
+      />
     </>
   );
 }
