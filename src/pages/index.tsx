@@ -5,14 +5,12 @@ import {
   Empty,
   Pagination,
   Layout,
-  Card,
-  Modal,
-  Button,
 } from "antd";
 import { useState, useEffect } from "react";
 import { api } from "../services/api";
 import { BookModal } from "../components/BookModal";
 import { BookCard } from "../components/BookCard";
+import { Cover } from "../components/Cover";
 
 const { Search } = Input;
 const { Footer } = Layout;
@@ -47,7 +45,7 @@ export default function Home() {
     const { data } = await api.get(
       `volumes?q=harry+potter&maxResults=20&startIndex=${
         page * 20
-      }&key=AIzaSyDAqfUsi25efc9iYx7ZppjrP756SKRafWQ`
+      }&key=${process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY}`
     );
     const { items, totalItems } = data;
 
@@ -62,27 +60,10 @@ export default function Home() {
 
   return (
     <>
-      <div className={styles.coverBackground}></div>
-      <div className={styles.covering}>
-        <img
-          className={styles.img1}
-          src="/images/img1.svg"
-          alt="girl and book"
-        />
-        <img className={styles.img2} src="/images/img2.svg" alt="bookshelf" />
-        <span className={styles.logo}>
-          Book<span>Finder</span>
-        </span>
-      </div>
-
+      <Cover styles={styles} />
+      <div className={styles.pageHeader}><span>Encontre informações de seus livros preferidos!</span></div>
       <Space className={styles.searchBar} direction="vertical">
-        <Search
-          placeholder="input search text"
-          allowClear
-          enterButton="Search"
-          size="large"
-          onSearch={onSearch}
-        />
+        <Search placeholder="Faça sua busca" onSearch={onSearch} enterButton allowClear size="large"/>
       </Space>
       <Space className={styles.content} direction="vertical">
         <Space

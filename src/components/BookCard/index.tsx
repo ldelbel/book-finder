@@ -1,4 +1,5 @@
 import { Card, Empty } from "antd";
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 
 const { Meta } = Card;
 
@@ -7,6 +8,7 @@ export function BookCard({ book, showModal }) {
     <Card
       hoverable
       style={{ width: 199, height: "25rem", overflow: "hidden" }}
+      bodyStyle={{ paddingTop: 10}}
       cover={
         <div
           style={{
@@ -26,8 +28,16 @@ export function BookCard({ book, showModal }) {
           )}
         </div>
       }
+      actions={[
+        <SettingOutlined key="setting" />,
+        <EditOutlined key="edit" />,
+        <EllipsisOutlined key="ellipsis" />,
+      ]}
     >
-      <Meta title={book.title} description={book.subtitle} />
+      {/* <Meta title={book.title} description={book.subtitle} /> */}
+      <div>
+        <p style={{ fontWeight: "bold", fontSize: "0.6rem"}}>{book.title}</p>
+      </div>
     </Card>
   );
 }

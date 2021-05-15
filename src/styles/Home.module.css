@@ -42,7 +42,7 @@
 }
 
 .searchBar {
-  margin-top: 4rem;
+  margin-top: 1rem;
   display: flex;
   padding: 0 20%;
 }
@@ -70,6 +70,17 @@
   margin-top: 6rem;
   height: 2rem;
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(46,63,179,1) 27%, rgba(89,126,247,1) 100%);
+}
+
+.pageHeader {
+  margin-top: 2rem;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgba(9, 9, 121, 0.767) ;
 }
 
 @media (max-width: 500px) {
