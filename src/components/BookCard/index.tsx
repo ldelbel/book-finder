@@ -58,6 +58,7 @@ export function BookCard({ book, showModal }) {
           height: 40,
           display: "flex",
           fontSize: "1.3rem",
+          borderTop: '1px solid #f0f0f0'
         }}
       >
         <span
@@ -67,6 +68,7 @@ export function BookCard({ book, showModal }) {
             display: "flex",
             alignItems: "center",
             paddingLeft: "1rem",
+
           }}
         >
           {book.publishedDate?.slice(0, 4)}
@@ -75,6 +77,7 @@ export function BookCard({ book, showModal }) {
           style={{
             textAlign: "center",
             width: "30%",
+
           }}
         >
           {book.averageRating ? (
