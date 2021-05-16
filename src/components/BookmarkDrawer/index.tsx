@@ -1,17 +1,45 @@
-import { Drawer } from "antd";
+import { Drawer, Empty } from "antd";
+import { DrawerCard } from "./DrawerCard";
 
-export function BookmarkDrawer({ onClose, visible}) {
+export function BookmarkDrawer({
+  onClose,
+  visible,
+  bookmarks,
+  showModal,
+  removeBookmark,
+}) {
+  if (bookmarks.length === 0) {
+    return (
+      <Drawer
+        title="Favoritados"
+        placement="right"
+        onClose={onClose}
+        visible={visible}
+      >
+        <Empty
+          description={
+            <span style={{ color: "#666" }}>Ué!?</span>
+          }
+        />
+      </Drawer>
+    );
+  }
+
   return (
     <Drawer
-      title="Basic Drawer"
+      title="Favoritados"
       placement="right"
-      closable={false}
       onClose={onClose}
       visible={visible}
     >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      {bookmarks.map((book) => (
+        <DrawerCard
+          bookmark={book}
+          showModal={showModal}
+          key={book.id}
+          removeBookmark={removeBookmark}
+        />
+      ))}
     </Drawer>
   );
 }

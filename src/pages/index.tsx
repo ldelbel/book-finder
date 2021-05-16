@@ -31,13 +31,11 @@ export default function Home() {
   const handleAddBookmark = (book: IBookmark) => {
     const newBookmarks = addBookmark(book);
     setBookmarks(newBookmarks);
-    console.log("after adding" + bookmarks)
   };
 
   const handleRemoveBookmark = (book: IBookmark) => {
     const newBookmarks = removeBookmark(book);
     setBookmarks(newBookmarks);
-    console.log("after removing" + bookmarks)
   };
 
   const onSearch = () => {
@@ -106,7 +104,7 @@ export default function Home() {
   return (
     <>
       <Cover styles={styles} />
-      <BookmarkButton showDrawer={showDrawer} />
+      <BookmarkButton showDrawer={showDrawer} count={bookmarks.length} />
       <div className={styles.pageHeader}>
         <span>Encontre informações de seus livros preferidos!</span>
       </div>
@@ -137,12 +135,13 @@ export default function Home() {
             size={12}
           >
             {data ? (
-              data.map((item: IWholeBook) => (
-                bookmarks.map(book => book.id).includes(item.id) ? (
+              data.map((item: IWholeBook) =>
+                bookmarks.map((book) => book.id).includes(item.id) ? (
                   <BookCard
                     book={item}
                     showModal={showModal}
                     action={handleRemoveBookmark}
+                    key={item.id}
                     bookmarked
                   />
                 ) : (
@@ -150,9 +149,10 @@ export default function Home() {
                     book={item}
                     showModal={showModal}
                     action={handleAddBookmark}
+                    key={item.id}
                   />
                 )
-              ))
+              )
             ) : (
               <Empty
                 description={
@@ -186,7 +186,13 @@ export default function Home() {
       />
 
       {/* DRAWER INFO */}
-      <BookmarkDrawer onClose={onDrawerClose} visible={isDrawerVisible} />
+      <BookmarkDrawer
+        onClose={onDrawerClose}
+        visible={isDrawerVisible}
+        bookmarks={bookmarks}
+        showModal={showModal}
+        removeBookmark={handleRemoveBookmark}
+      />
     </>
   );
 }

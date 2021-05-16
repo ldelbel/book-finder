@@ -2,10 +2,10 @@ import { Button, Badge } from "antd";
 import { FaBookmark } from "react-icons/fa";
 import { purple } from "@ant-design/colors";
 
-export function BookmarkButton({ showDrawer }) {
+export function BookmarkButton({ showDrawer, count }) {
   return (
     <div style={{ position: 'fixed', right: "1rem", bottom: "1rem"}}>
-      <Badge count={1} size="small">
+      <Badge count={count} size="small">
         <Button
           type="primary"
           onClick={showDrawer}
