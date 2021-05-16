@@ -1,0 +1,66 @@
+.container {
+  width: 250px;
+  height: 25rem;
+  overflow: hidden;
+}
+
+.cover  {
+  height: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.content {
+  height: 104px;
+  padding: 0 0.5rem 0 0.5rem;
+  overflow: hidden;
+
+  &_title {
+    font-weight: bold;
+    font-size: 1rem;
+    word-break: break-all;
+  }
+
+  &_subtitle {
+    font-size: 0.7rem;
+    word-break: break-all;
+  }
+
+  &_published {
+    height: 40px;
+    display: flex;
+    font-size: 1.3rem;
+    border-top: 1px solid #f0f0f0;
+
+    > span {
+      width: 70%;
+      color: #999999;
+      display: flex;
+      align-items: center;
+      padding-left: 1rem;
+    }
+  }
+
+  &_rating {
+    text-align: center;
+    width: 30%;
+
+    &_valid {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      color: #666;
+    }
+
+    &_invalid {
+      background-color: #eee;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      color: #ddd;
+    }
+  }
+}

@@ -1,5 +1,5 @@
-import styles from "../styles/Home.module.css";
-import { Input, Space, Empty, Pagination, Layout } from "antd";
+import styles from "../styles/Home.module.scss";
+import { Input, Space, Empty, Pagination, Layout, Spin } from "antd";
 import { useState, useEffect } from "react";
 import { api } from "../services/api";
 import { BookModal } from "../components/BookModal";
@@ -11,6 +11,7 @@ const { Footer } = Layout;
 
 export default function Home() {
   const [page, setPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [totalBooks, setTotalBooks] = useState(0);
@@ -38,6 +39,7 @@ export default function Home() {
   };
 
   const fetchBooks = async (page = 0) => {
+    setIsLoading(true);
     const searchTerms = searchTerm.split(" ").join("+");
     if (searchTerms) {
       const { data } = await api.get(
@@ -48,13 +50,11 @@ export default function Home() {
 
       const { items, totalItems } = data;
       setData(items);
-      console.log(totalItems);
       if (page === 0) setTotalBooks(0.7 * totalItems);
-      console.log(totalBooks);
-      console.log("------");
     } else {
-      setData(null)
+      setData(null);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -87,22 +87,26 @@ export default function Home() {
         />
       </Space>
       <Space className={styles.content} direction="vertical">
-        <Space
-          className={styles.bookList}
-          direction="horizontal"
-          align="center"
-          style={{ justifyContent: "center" }}
-          wrap
-          size={12}
-        >
-          {data ? (
-            data.map((item) => (
-              <BookCard book={item.volumeInfo} showModal={showModal} />
-            ))
-          ) : (
-            <Empty description={<span>Ops! Não tem livro aqui não.</span>} />
-          )}
-        </Space>
+        <Spin spinning={isLoading}>
+          <div style={{height: "100%"}}>aaa</div>
+          <Space
+            className={styles.bookList}
+            direction="horizontal"
+            align="center"
+            style={{ justifyContent: "center" }}
+            wrap
+            size={12}
+          >
+            {data ? (
+              data.map((item) => (
+                <BookCard book={item.volumeInfo} showModal={showModal} />
+              ))
+            ) : (
+              <Empty description={<span>Ops! Não tem livro aqui não.</span>} />
+            )}
+          </Space>
+        </Spin>
+
         <Pagination
           defaultCurrent={0}
           total={totalBooks}
