@@ -7,7 +7,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/ldelbel/book-finder">
-    <img src="logo.png" alt="Logo" width="100">
+    <img src="images/logo.png" alt="Logo" width="100">
   </a>
 
   <h2 align="center">BookFinder</h2>
@@ -37,6 +37,8 @@
 ## About <a name = "about"></a>
 
 BookFinder is a project develop as a response to the UP! Tech challenge by Riachuelo and RedPill RH.
+
+![screenshot](images/screenshot.png)
 
 ## Live Demo <a name = "ldl"></a>
 
