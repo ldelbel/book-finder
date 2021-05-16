@@ -52,13 +52,15 @@ export function BookModal({ book, visible, onOk, onCancel }) {
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
             style={{
-              height: 150,
+              height: 80,
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
+              marginLeft: "1rem"
             }}
-            imageStyle={{ width: "80%" }}
+            imageStyle={{ width: "100%" }}
+            description={<div style={{ paddingRight: '1rem', color: '#666'}}>Sem imagem</div>}
           />
         )}
         <div style={{ padding: "0.3rem" }}>
@@ -68,8 +70,8 @@ export function BookModal({ book, visible, onOk, onCancel }) {
               singular="Subtítulo"
               plural="Autores"
             />
-            <Listing subjects={authors} singular="Autor" plural="Autores" />
-            <Listing subjects={publisher} singular="Editor" />
+            <Listing subjects={authors} singular="Autor(a)" plural="Autores" />
+            <Listing subjects={publisher} singular="Editora" />
             <Listing subjects={publishedDate} singular="Data de Publicação" />
             <Listing subjects={language} singular="Linguagem" />
             <Listing subjects={pageCount} singular="Páginas" />

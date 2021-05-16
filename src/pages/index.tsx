@@ -1,10 +1,17 @@
 import styles from "../styles/Home.module.scss";
-import { Input, Space, Empty, Pagination, Layout, Spin } from "antd";
+import { Input, Space, Empty, Pagination, Layout, Spin, Button } from "antd";
 import { useState, useEffect } from "react";
 import { api } from "../services/api";
+import {
+  addBookmark,
+  removeBookmark,
+  getBookmarks,
+} from "../services/bookmark";
 import { BookModal } from "../components/BookModal";
 import { BookCard } from "../components/BookCard";
 import { Cover } from "../components/Cover";
+import { BookmarkDrawer } from "../components/BookmarkDrawer";
+import { IBookInfo, IBookmark, IWholeBook } from "../utils/types";
 
 const { Search } = Input;
 const { Footer } = Layout;
@@ -13,21 +20,40 @@ export default function Home() {
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(null);
+  const [bookmarks, setBookmarks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [totalBooks, setTotalBooks] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [modalCurrentBook, setModalCurrentBook] = useState({
-    title: "",
-  });
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [modalCurrentBook, setModalCurrentBook] = useState({} as IBookInfo);
+
+  const handleAddBookmark = (book: IBookmark) => {
+    const newBookmarks = addBookmark(book);
+    setBookmarks(newBookmarks);
+    console.log("after adding" + bookmarks)
+  };
+
+  const handleRemoveBookmark = (book: IBookmark) => {
+    const newBookmarks = removeBookmark(book);
+    setBookmarks(newBookmarks);
+    console.log("after removing" + bookmarks)
+  };
 
   const onSearch = () => {
     fetchBooks(page);
     setPage(0);
   };
 
-  const showModal = (item) => {
+  const showModal = (item: IBookInfo) => {
     setModalCurrentBook(item);
     setIsModalVisible(true);
+  };
+
+  const showDrawer = () => {
+    setIsDrawerVisible(true);
+  };
+  const onDrawerClose = () => {
+    setIsDrawerVisible(false);
   };
 
   const handleOk = () => {
@@ -50,9 +76,10 @@ export default function Home() {
 
       const { items, totalItems } = data;
       setData(items);
-      if (page === 0) setTotalBooks(0.7 * totalItems);
+      if (page === 0) setTotalBooks(0.75 * totalItems);
     } else {
       setData(null);
+      setTotalBooks(0);
     }
     setIsLoading(false);
   };
@@ -70,9 +97,17 @@ export default function Home() {
     fetchBooks(page);
   }, [page]);
 
+  useEffect(() => {
+    const books = getBookmarks();
+    setBookmarks(books);
+  }, []);
+
   return (
     <>
       <Cover styles={styles} />
+      <Button type="primary" onClick={showDrawer}>
+        Open
+      </Button>
       <div className={styles.pageHeader}>
         <span>Encontre informações de seus livros preferidos!</span>
       </div>
@@ -88,7 +123,12 @@ export default function Home() {
       </Space>
       <Space className={styles.content} direction="vertical">
         <Spin spinning={isLoading}>
-          <div style={{height: "100%"}}>aaa</div>
+          <div
+            style={{ height: "100%", color: "#888", margin: "2rem 0 0 1rem" }}
+          >
+            Mostrando resultados {page * 20 + data ? 1 : 0}-
+            {page * 20 + (data && data.length)} de {Math.floor(totalBooks)}
+          </div>
           <Space
             className={styles.bookList}
             direction="horizontal"
@@ -98,11 +138,30 @@ export default function Home() {
             size={12}
           >
             {data ? (
-              data.map((item) => (
-                <BookCard book={item.volumeInfo} showModal={showModal} />
+              data.map((item: IWholeBook) => (
+                bookmarks.map(book => book.id).includes(item.id) ? (
+                  <BookCard
+                    book={item}
+                    showModal={showModal}
+                    action={handleRemoveBookmark}
+                    bookmarked
+                  />
+                ) : (
+                  <BookCard
+                    book={item}
+                    showModal={showModal}
+                    action={handleAddBookmark}
+                  />
+                )
               ))
             ) : (
-              <Empty description={<span>Ops! Não tem livro aqui não.</span>} />
+              <Empty
+                description={
+                  <span style={{ color: "#666" }}>
+                    Ops! Não tem livro aqui não.
+                  </span>
+                }
+              />
             )}
           </Space>
         </Spin>
@@ -126,6 +185,9 @@ export default function Home() {
         onOk={handleOk}
         onCancel={handleCancel}
       />
+
+      {/* DRAWER INFO */}
+      <BookmarkDrawer onClose={onDrawerClose} visible={isDrawerVisible} />
     </>
   );
 }
