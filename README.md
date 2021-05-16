@@ -1,34 +1,118 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BookFinder
 
-## Getting Started
+[![View Code](https://img.shields.io/badge/View%20-Code-green)]()
+[![Github Issues](https://img.shields.io/badge/GitHub-Issues-orange)]()
+[![GitHub Pull Requests](https://img.shields.io/badge/GitHub-Pull%20Requests-blue)]()
 
-First, run the development server:
+<br />
+<p align="center">
+  <a href="https://github.com/ldelbel/book-finder">
+    <img src="logo.png" alt="Logo" width="100">
+  </a>
 
-```bash
-npm run dev
-# or
-yarn dev
+  <h2 align="center">BookFinder</h2>
+
+  <h3 align="center">Platform to find books listed in Google Books<h3>
+  <p align="center">
+    <a href="https://github.com/ldelbel/book-finder"><strong>Explore files »</strong></a>
+    <br />
+    <br />
+    -
+    <a href="https://github.com/ldelbel/book-finder/issues">Report Bug</a>
+    -
+    <a href="https://github.com/ldelbel/book-finder/pulls">Request feature</a>
+    -
+  </p>
+</p>
+    
+## Content
+
+<p align="center">
+  <a href="#about">About</a> •
+  <a href="#ins">Installing</a> •
+  <a href="#with">Built with</a> •
+  <a href="#author">Author</a>
+</p>
+
+## About <a name = "about"></a>
+
+BookFinder is a project develop as a response to the UP! Tech challenge by Riachuelo and RedPill RH.
+
+## Live Demo <a name = "ldl"></a>
+
+Check the online version [HERE](https://book-finder-gamma.vercel.app/).
+
+## 🔧 Built with <a name = "with"></a>
+
+- Typescript
+- React
+- NextJS
+- yarn
+- SASS
+- Ant Design
+- Axios
+
+## 🛠 Requirements <a name = "req"></a>
+
+You'll need a package manager to install the dependencies listed in package.json in order to make it work in your local machine.
+This project used Yarn. The installation guide can be found [Here](https://classic.yarnpkg.com/en/docs/install/#debian-stable).
+
+## 🔨 Setup and Installing <a name = "ins"></a>
+
+To setup the project, run the following commands on terminal:
+
+```
+$ cd <folder> (the path you want to have the files installed)
+$ git clone https://github.com/ldelbel/book-finder.git
+$ cd book-finder
+$ yarn install
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This will install the dependencies in your local machine. This process can take a few minutes.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 🔨 Running Locally
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+After installing the dependencies you can run the app with code below
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+For production
 
-## Learn More
+```
+$ yarn build
+$ yarn start
 
-To learn more about Next.js, take a look at the following resources:
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+$ yarn dev
 
-## Deploy on Vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If your default broswer doesn't open automatically, visit http://localhost/3000.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## ✒️ Author <a name = "author"></a>
+
+### 👨‍💻 Lucas Delbel
+
+[![GitHub](https://img.shields.io/badge/-GitHub-000?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/ldelbel) <br>
+[![LINKEDIN](https://img.shields.io/badge/-LINKEDIN-0077B5?style=for-the-badge&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/lucasdelbel/) <br>
+[![EMAIL](https://img.shields.io/badge/-EMAIL-D14836?style=for-the-badge&logo=Mail.Ru&logoColor=white)](mailto:lucdelbel@gmail.com) <br>
+[![TWITTER](https://img.shields.io/badge/-TWITTER-1DA1F2?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/delbel_lucas)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page]().
+
+## 👍 Show your support
+
+Give a ⭐️ if you like this project!
+
+## :clap: Acknowledgements
+
+- Riachuelo: [@riachuelo](https://www.riachuelo.com.br/)
+- RedPill RH: [@redpill](https://www.redpillrh.com.br/)
+- UP! Tech: [@uptech](https://up-tech.breezy.hr/)
