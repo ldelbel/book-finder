@@ -1,5 +1,5 @@
 import styles from "../styles/Home.module.scss";
-import { Input, Space, Empty, Pagination, Layout, Spin, Button } from "antd";
+import { Input, Space, Empty, Pagination, Layout, Spin } from "antd";
 import { useState, useEffect } from "react";
 import { api } from "../services/api";
 import {
@@ -11,6 +11,7 @@ import { BookModal } from "../components/BookModal";
 import { BookCard } from "../components/BookCard";
 import { Cover } from "../components/Cover";
 import { BookmarkDrawer } from "../components/BookmarkDrawer";
+import { BookmarkButton } from "../components/BookmarkButton";
 import { IBookInfo, IBookmark, IWholeBook } from "../utils/types";
 
 const { Search } = Input;
@@ -105,9 +106,7 @@ export default function Home() {
   return (
     <>
       <Cover styles={styles} />
-      <Button type="primary" onClick={showDrawer}>
-        Open
-      </Button>
+      <BookmarkButton showDrawer={showDrawer} />
       <div className={styles.pageHeader}>
         <span>Encontre informações de seus livros preferidos!</span>
       </div>
