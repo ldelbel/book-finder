@@ -4,7 +4,7 @@ import { purple } from "@ant-design/colors";
 
 export function BookmarkButton({ showDrawer, count }) {
   return (
-    <div style={{ position: 'fixed', right: "1rem", bottom: "1rem"}}>
+    <div style={{ position: 'fixed', right: "1rem", bottom: "1rem", zIndex: 3}}>
       <Badge count={count} size="small">
         <Button
           type="primary"

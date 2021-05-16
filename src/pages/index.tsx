@@ -103,7 +103,7 @@ export default function Home() {
 
   return (
     <>
-      <Cover styles={styles} />
+      <Cover />
       <BookmarkButton showDrawer={showDrawer} count={bookmarks.length} />
       <div className={styles.pageHeader}>
         <span>Encontre informações de seus livros preferidos!</span>

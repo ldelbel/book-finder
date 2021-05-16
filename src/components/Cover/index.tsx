@@ -1,7 +1,8 @@
-export function Cover({ styles }) {
+import styles from './styles.module.scss';
+
+export function Cover() {
   return (
     <>
-      <div className={styles.coverBackground}></div>
       <div className={styles.covering}>
         <img
           className={styles.img1}
