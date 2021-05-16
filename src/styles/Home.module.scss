@@ -36,6 +36,14 @@
   align-items: center;
 }
 
+.paginationInfo {
+  width: 80vw;
+  max-width: 1100;
+  height: 100%;
+  color: #888;
+  margin: 2rem auto 0 auto;
+}
+
 .bookList {
   width: 80vw;
   border: 1px solid #d9d9d9;
@@ -64,6 +72,14 @@
   color: rgba(9, 9, 121, 0.767) ;
 }
 
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(214, 214, 214);
+  text-shadow: 1px 1px rgba(0,0,0,0.5);
+  text-align: center;
+}
 
 @media (max-width: 780px) {
   .pageHeader {
@@ -73,11 +89,14 @@
   }
 }
 
-
 @media (max-width: 500px) {
   .bookList {
     width: 100vw;
     margin-right: 0;
     margin-left: 0;
+  }
+
+  .footer {
+    font-size: 0.7rem;
   }
 }

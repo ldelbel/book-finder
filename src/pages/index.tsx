@@ -118,14 +118,12 @@ export default function Home() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </Space>
+      <div className={styles.paginationInfo}>
+        Mostrando resultados {page * 20 + data ? 1 : 0}-
+        {page * 20 + (data && data.length)} de {Math.floor(totalBooks)}
+      </div>
       <Space className={styles.content} direction="vertical">
         <Spin spinning={isLoading}>
-          <div
-            style={{ height: "100%", color: "#888", margin: "2rem 0 0 1rem" }}
-          >
-            Mostrando resultados {page * 20 + data ? 1 : 0}-
-            {page * 20 + (data && data.length)} de {Math.floor(totalBooks)}
-          </div>
           <Space
             className={styles.bookList}
             direction="horizontal"
@@ -175,7 +173,18 @@ export default function Home() {
           onChange={(page, _) => setPage(page - 1)}
         />
       </Space>
-      <Footer className={styles.footer} />
+      <Footer className={styles.footer}>
+        <span>
+          ©Copyright - Built and Designed by{" "}
+          <a
+            href="https://www.lucasdelbel.com/"
+            target="_blank"
+            style={{ color: "rgb(45, 190, 45)"}}
+          >
+            <span style={{ marginTop: '-5px'}}>Lucas Delbel</span>
+          </a>
+        </span>
+      </Footer>
 
       {/* MODAL INFO */}
       <BookModal

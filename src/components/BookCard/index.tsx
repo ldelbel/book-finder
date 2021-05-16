@@ -29,6 +29,7 @@ export function BookCard({
       }
       <Card
         hoverable
+        style={{ borderColor: "#d1d1d1"}}
         className={styles.container}
         bodyStyle={{ height: 110, padding: "1rem 0 0 0" }}
         onClick={() => showModal(bookInfo)}
