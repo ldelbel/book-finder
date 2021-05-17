@@ -13,6 +13,8 @@ export function DrawerCard({ bookmark, showModal, removeBookmark }) {
         display: "flex",
         marginBottom: "1rem",
         overflow: "hidden",
+        boxShadow: "2px 2px 3px rgba(0,0,0,0.5)",
+        borderRadius: '3px'
       }}
     >
       <div

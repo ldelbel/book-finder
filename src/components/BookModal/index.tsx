@@ -25,6 +25,7 @@ export function BookModal({ book, visible, onOk, onCancel }) {
       onOk={onOk}
       onCancel={onCancel}
       bodyStyle={{ paddingTop: 5 }}
+      zIndex={10}
     >
       <div
         style={{

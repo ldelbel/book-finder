@@ -15,6 +15,7 @@ export function BookmarkDrawer({
         placement="right"
         onClose={onClose}
         visible={visible}
+        zIndex={9}
       >
         <Empty
           description={
@@ -31,6 +32,7 @@ export function BookmarkDrawer({
       placement="right"
       onClose={onClose}
       visible={visible}
+      zIndex={9}
     >
       {bookmarks.map((book) => (
         <DrawerCard
