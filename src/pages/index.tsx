@@ -21,12 +21,12 @@ export default function Home() {
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(null);
-  const [bookmarks, setBookmarks] = useState([]);
+  const [bookmarks, setBookmarks] = useState<IBookmark[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [totalBooks, setTotalBooks] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
-  const [modalCurrentBook, setModalCurrentBook] = useState({} as IBookInfo);
+  const [modalCurrentBook, setModalCurrentBook] = useState<IBookInfo>({} as IBookInfo);
 
   const handleAddBookmark = (book: IBookmark) => {
     const newBookmarks = addBookmark(book);
@@ -84,12 +84,12 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
+    const delayDebounce = setTimeout(() => {
       fetchBooks(page);
       setPage(0);
     }, 2000);
 
-    return () => clearTimeout(delayDebounceFn);
+    return () => clearTimeout(delayDebounce);
   }, [searchTerm]);
 
   useEffect(() => {

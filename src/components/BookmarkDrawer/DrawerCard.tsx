@@ -1,4 +1,4 @@
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip, Empty } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
 export function DrawerCard({ bookmark, showModal, removeBookmark }) {
@@ -14,22 +14,33 @@ export function DrawerCard({ bookmark, showModal, removeBookmark }) {
         marginBottom: "1rem",
         overflow: "hidden",
         boxShadow: "2px 2px 3px rgba(0,0,0,0.5)",
-        borderRadius: '3px'
+        borderRadius: "3px",
       }}
     >
       <div
         style={{
-          width: "45%",
+          width: "55%",
           backgroundColor: "#f0f0f0",
         }}
       >
         <div style={{ height: "70%" }}>
-          <img src={bookInfo.imageLinks.thumbnail} alt="book" width="100%" />
+          {bookInfo.imageLinks ? (
+            <img src={bookInfo.imageLinks?.thumbnail} alt="book" width="100%" />
+          ) : (
+            <Empty
+              style={{ width: "100%", margin: 0, paddingTop: '1rem' }}
+              imageStyle={{ width: "100%" }}
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={
+                <span style={{ color: "#888", width: "100", fontSize: '0.5rem' }}>Sem Imagem</span>
+              }
+            />
+          )}
         </div>
         <div style={{ height: "30%" }}>
           <Button
             type="primary"
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "100%", height: "105%" }}
             onClick={() => showModal(bookInfo)}
           >
             Ver
@@ -51,7 +62,7 @@ export function DrawerCard({ bookmark, showModal, removeBookmark }) {
           </Tooltip>
         </div>
         <div
-          style={{ height: "100%", padding: "0.5rem", wordBreak: "break-all" }}
+          style={{ height: "100%", padding: "0.5rem", fontSize: "0.7rem", overflow: 'hidden', marginBottom: '0.3rem'}}
         >
           {bookInfo.title}
         </div>
