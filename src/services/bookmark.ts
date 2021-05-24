@@ -1,5 +1,7 @@
 import { IBookmark } from "../utils/types";
 
+
+
 export function addBookmark(book: IBookmark) {
   const bookmarks = JSON.parse(
     localStorage.getItem("@book-finder:bookmarks") || "[]"

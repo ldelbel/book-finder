@@ -1,7 +1,16 @@
 import { Modal, Empty, Button, Rate } from "antd";
+import { IBookInfo } from "../../utils/types";
 import { Listing } from "./Listing";
+import styles from "./styles.module.scss";
 
-export function BookModal({ book, visible, onOk, onCancel }) {
+interface BookModalProps {
+  book: IBookInfo;
+  visible: boolean;
+  onOk: () => void;
+  onCancel: () => void;
+}
+
+export function BookModal({ book, visible, onOk, onCancel }: BookModalProps) {
   const {
     title,
     authors,
@@ -27,41 +36,27 @@ export function BookModal({ book, visible, onOk, onCancel }) {
       bodyStyle={{ paddingTop: 5 }}
       zIndex={10}
     >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          marginBottom: "0.5rem",
-        }}
-      >
+      <div className={styles.container}>
         <div>
-          <span style={{ marginRight: '1rem', color: '#bebebe'}}>{ratingsCount && `(${ratingsCount})`}</span>
+          <span className={styles.container__ratings}>
+            {ratingsCount && `(${ratingsCount})`}
+          </span>
           <Rate disabled defaultValue={0} value={averageRating} allowHalf />
         </div>
       </div>
-      <div
-        style={{
-          backgroundColor: "#f0f0f0",
-          marginBottom: "2rem",
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
+      <div className={styles.content}>
         {imageLinks ? (
           <img alt={title} src={imageLinks.thumbnail} height={150} />
         ) : (
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
-            style={{
-              height: 80,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              marginLeft: "1rem"
-            }}
+            className={styles.empty}
             imageStyle={{ width: "100%" }}
-            description={<div style={{ paddingRight: '1rem', color: '#666'}}>Sem imagem</div>}
+            description={
+              <div style={{ color: "#666", textAlign: "center" }}>
+                Sem imagem
+              </div>
+            }
           />
         )}
         <div style={{ padding: "0.3rem" }}>
