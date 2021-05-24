@@ -87,7 +87,7 @@ export default function Home() {
     const delayDebounce = setTimeout(() => {
       fetchBooks(page);
       setPage(0);
-    }, 2000);
+    }, 1500);
 
     return () => clearTimeout(delayDebounce);
   }, [searchTerm]);

@@ -1,12 +1,12 @@
 import { Card, Empty, Rate } from "antd";
 import styles from "./styles.module.scss";
 import { BookMark } from "./Bookmark";
-import { IBookInfo, IWholeBook } from "../../utils/types";
+import { IBookInfo, IBookmark, IWholeBook } from "../../utils/types";
 
 interface BookCardProps {
-  book: IWholeBook;
+  book: IWholeBook | IBookmark;
   showModal: (book: IBookInfo) => void;
-  action: (book: IWholeBook) => void;
+  action: (book: IWholeBook | IBookmark) => void;
   bookmarked?: boolean;
 }
 
@@ -16,20 +16,19 @@ export function BookCard({
   action,
   bookmarked = false,
 }: BookCardProps) {
-  const bookInfo = book.volumeInfo;
+  const wholeBook = book as IWholeBook;
+  const bookInfo = wholeBook.volumeInfo;
 
   return (
     <div style={{ position: "relative" }}>
-      {
-        bookmarked ? (
-          <BookMark item={book} onClick={action} marked />
-        ) : (
-          <BookMark item={book} onClick={action} />
-        )
-      }
+      {bookmarked ? (
+        <BookMark item={book as IBookmark} onClick={action} marked />
+      ) : (
+        <BookMark item={book as IBookmark} onClick={action} />
+      )}
       <Card
         hoverable
-        style={{ borderColor: "#d1d1d1"}}
+        style={{ borderColor: "#d1d1d1" }}
         className={styles.container}
         bodyStyle={{ height: 110, padding: "1rem 0 0 0" }}
         onClick={() => showModal(bookInfo)}

@@ -4,7 +4,7 @@
   overflow: hidden;
 }
 
-.cover  {
+.cover {
   height: 15rem;
   display: flex;
   justify-content: center;
@@ -62,6 +62,36 @@
       align-items: center;
       height: 100%;
       color: #ddd;
+    }
+  }
+}
+
+.bookmark {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
+
+  &__button {
+    border: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    font-size: 2rem !important;
+
+    &:hover {
+      border: none !important;
+      background-color: transparent !important;
+    }
+
+    &_marked {
+      @extend .bookmark__button;
+      color: #fa541c !important;
+    }
+
+    &_unmarked {
+      @extend .bookmark__button;
+      color: #bbbbbb !important;
     }
   }
 }

@@ -6,7 +6,7 @@ export interface IWholeBook {
 export interface IBookInfo {
   authors: [string];
   title: string;
-  imageLinks: {
+  imageLinks?: {
     thumbnail: string;
   };
   description: string;

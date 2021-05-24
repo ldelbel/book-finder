@@ -1,4 +1,5 @@
 import { Drawer, Empty } from "antd";
+import { IBookmark } from "../../utils/types";
 import { DrawerCard } from "./DrawerCard";
 
 export function BookmarkDrawer({
@@ -34,7 +35,7 @@ export function BookmarkDrawer({
       visible={visible}
       zIndex={9}
     >
-      {bookmarks.map((book) => (
+      {bookmarks.map((book: IBookmark) => (
         <DrawerCard
           bookmark={book}
           showModal={showModal}

@@ -1,5 +1,11 @@
 import { Button, Tooltip, Empty } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
+import { IBookInfo, IBookmark } from "../../utils/types";
+
+interface DrawerCard {
+  bookmark: IBookmark;
+  showModal: IBookInfo;
+}
 
 export function DrawerCard({ bookmark, showModal, removeBookmark }) {
   const bookInfo = bookmark.volumeInfo;
@@ -28,11 +34,15 @@ export function DrawerCard({ bookmark, showModal, removeBookmark }) {
             <img src={bookInfo.imageLinks?.thumbnail} alt="book" width="100%" />
           ) : (
             <Empty
-              style={{ width: "100%", margin: 0, paddingTop: '1rem' }}
+              style={{ width: "100%", margin: 0, paddingTop: "1rem" }}
               imageStyle={{ width: "100%" }}
               image={Empty.PRESENTED_IMAGE_SIMPLE}
               description={
-                <span style={{ color: "#888", width: "100", fontSize: '0.5rem' }}>Sem Imagem</span>
+                <span
+                  style={{ color: "#888", width: "100", fontSize: "0.5rem" }}
+                >
+                  Sem Imagem
+                </span>
               }
             />
           )}
@@ -54,6 +64,7 @@ export function DrawerCard({ bookmark, showModal, removeBookmark }) {
             <Button
               type="primary"
               danger
+              size="small"
               style={{ padding: "1px 4px", height: "auto" }}
               onClick={() => removeBookmark(bookmark)}
             >
@@ -62,7 +73,13 @@ export function DrawerCard({ bookmark, showModal, removeBookmark }) {
           </Tooltip>
         </div>
         <div
-          style={{ height: "100%", padding: "0.5rem", fontSize: "0.7rem", overflow: 'hidden', marginBottom: '0.3rem'}}
+          style={{
+            height: "100%",
+            padding: "0.5rem",
+            fontSize: "0.7rem",
+            overflow: "hidden",
+            marginBottom: "0.3rem",
+          }}
         >
           {bookInfo.title}
         </div>

@@ -1,7 +1,7 @@
 import { Tooltip, Button } from "antd";
 import { FaBookmark } from "react-icons/fa";
 import { IBookmark } from "../../utils/types";
-import { volcano } from "@ant-design/colors";
+import styles from "./styles.module.scss";
 
 interface BookMarkProps {
   item: IBookmark;
@@ -11,19 +11,16 @@ interface BookMarkProps {
 
 export function BookMark({ item, onClick, marked = false }: BookMarkProps) {
   return (
-    <div style={{ position: "absolute", top: 5, right: 5, zIndex: 1 }}>
+    <div className={styles.bookmark}>
       <Tooltip
         title={marked ? "Remover dos favoritos" : "Adicionar aos favoritos"}
       >
         <Button
-          style={{
-            border: "none",
-            backgroundColor: "transparent",
-            boxShadow: "none",
-            padding: 0,
-            fontSize: "2rem",
-            color: marked ? volcano[5] : "#bbbbbb",
-          }}
+          className={
+            marked
+              ? styles.bookmark__button_marked
+              : styles.bookmark__button_unmarked
+          }
           onClick={() => onClick(item)}
         >
           <FaBookmark />
